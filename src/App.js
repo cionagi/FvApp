@@ -1,18 +1,24 @@
+//Dependency
 import React from 'react'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+
+//Components
+import Index from './screens/Index'
+import Posts from './screens/Posts'
+import Users from './screens/Users'
+
+//Assets
 import './App.scss'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Router>
+      <Switch>
+        <Route path={'/'} component={Index} exact={true} />
+        <Route path={'/posts/:id'} component={Posts} exact={true} />
+        <Route path={'/users/:id'} component={Users} exact={true} />
+      </Switch>
+    </Router>
   )
 }
 
