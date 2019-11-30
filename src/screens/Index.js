@@ -6,18 +6,9 @@ import { connect } from 'react-redux'
 
 //Components
 import CardPost from '../components/CardPost'
+import Loading from '../components/Loading'
 
 //Assets
-
-function Loading() {
-  return (
-    <div className={'col-12 text-center mt-5'}>
-      <div className="spinner-border" style={{ width: '4rem', height: '4rem' }} role="status">
-        <span className="sr-only">Loading...</span>
-      </div>
-    </div>
-  )
-}
 
 class Index extends Component {
   state = {
