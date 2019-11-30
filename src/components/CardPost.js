@@ -6,7 +6,6 @@ import { Link } from 'react-router-dom'
 //Assets
 class CardPost extends Component {
   render() {
-    console.log(this.props)
     const {
       post: { id, title, userId, body },
     } = this.props

@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 //Components
 import ComentPost from '../components/ComentPost'
 import { bindActionCreators } from 'redux'
-import { callGetPost } from '../store/actions/posts'
+import { callGetCommentByPost, callGetPost } from '../store/actions/posts'
 import { connect } from 'react-redux'
 import PostInfo from '../components/PostInfo'
 import Loading from '../components/Loading'
@@ -25,18 +25,25 @@ class Posts extends Component {
   componentWillReceiveProps(nextProps) {
     const { posts } = this.props
     if (posts.isLoadingPostInfo !== nextProps.posts.isLoadingPostInfo && !nextProps.posts.isLoadingPostInfo) {
+      const postId = this.props.match.params.id
+      this.props.actions.callGetCommentByPost(postId)
       this.setState({
         isLoadingPostInfo: false,
       })
-    } else {
+    }
+
+    if (posts.isLoadingPostComment !== nextProps.posts.isLoadingPostComment && !nextProps.posts.isLoadingPostComment) {
       this.setState({
-        isLoadingPostInfo: true,
+        isLoadingPostComment: false,
       })
     }
   }
 
   drawComments() {
-    return <ComentPost />
+    const { comments } = this.props.posts.post
+    return comments.map((comment) => {
+      return <ComentPost key={comment.id} comment={comment} />
+    })
   }
 
   render() {
@@ -45,7 +52,7 @@ class Posts extends Component {
       <>
         <div className="jumbotron jumbotron-fluid">
           <div className="container">
-            <img src={'https://via.placeholder.com/1000x300'} />
+            <img src={'https://via.placeholder.com/1000x300'} alt={'test image'} />
           </div>
         </div>
         <div className={'container'}>
@@ -68,7 +75,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { actions: bindActionCreators({ callGetPost }, dispatch) }
+  return { actions: bindActionCreators({ callGetPost, callGetCommentByPost }, dispatch) }
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Posts)

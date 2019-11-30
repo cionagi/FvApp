@@ -3,6 +3,7 @@ import * as Action from '../actions/ActionsTypes'
 const initialState = {
   isFetching: false,
   isLoadingPostInfo: false,
+  isLoadingPostComment: false,
   hasError: false,
   list: [],
   post: {},
@@ -68,6 +69,39 @@ class Posts {
     return {
       ...state,
       isLoadingPostInfo: false,
+      hasError: true,
+    }
+  }
+
+  static [Action.GET_COMMENTS_REQUEST](state, action) {
+    return {
+      ...state,
+      isLoadingPostComment: true,
+      hasError: false,
+      post: {
+        ...state.post,
+        comments: [],
+      },
+    }
+  }
+
+  static [Action.GET_COMMENTS_SUCCESS](state, action) {
+    const { response } = action
+    return {
+      ...state,
+      post: {
+        ...state.post,
+        comments: [...response],
+      },
+      isLoadingPostComment: false,
+      hasError: false,
+    }
+  }
+
+  static [Action.GET_COMMENTS_ERROR](state, action) {
+    return {
+      ...state,
+      isLoadingPostComment: false,
       hasError: true,
     }
   }

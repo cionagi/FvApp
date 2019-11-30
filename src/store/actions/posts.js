@@ -20,10 +20,23 @@ const getPost = (postId) => ({
   },
 })
 
+const getCommentByPost = (postId) => ({
+  [CALL_API]: {
+    types: [Action.GET_COMMENTS_REQUEST, Action.GET_COMMENTS_SUCCESS, Action.GET_COMMENTS_ERROR],
+    endpoint: routes.GET_COMMENTS.replace('{:postId}', postId),
+    method: 'get',
+    data: {},
+  },
+})
+
 export const callGetPosts = () => (dispatch) => {
   return dispatch(getPosts())
 }
 
 export const callGetPost = (postId) => (dispatch) => {
   return dispatch(getPost(postId))
+}
+
+export const callGetCommentByPost = (postId) => (dispatch) => {
+  return dispatch(getCommentByPost(postId))
 }
