@@ -1,10 +1,11 @@
 import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
-import { persistStore, persistReducer, storage } from 'redux-persist'
+import { persistStore, persistReducer } from 'redux-persist'
 import { composeWithDevTools } from 'redux-devtools-extension'
+import storage from 'redux-persist/lib/storage'
 import api from '../config/ApiConnect'
 
-import AppReducer from './reducers'
+import AppReducer from './reducer'
 
 const middlewares = [thunk, api]
 
