@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import Index from './screens/Index'
 import Posts from './screens/Posts'
 import Users from './screens/Users'
+import Navbar from './components/Navbar'
 
 //Assets
 import './App.scss'
@@ -13,9 +14,7 @@ import './App.scss'
 function App() {
   return (
     <Router>
-      <nav className="navbar navbar-light bg-light">
-        <span className="navbar-brand mb-0 h1">Navbar</span>
-      </nav>
+      <Navbar />
       <Switch>
         <Route path={'/'} component={Index} exact={true} />
         <Route path={'/posts/:id'} component={Posts} exact={true} />
