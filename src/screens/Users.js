@@ -1,5 +1,6 @@
 //Dependency
 import React, { Component } from 'react'
+import CardPost from '../components/CardPost'
 
 //Components
 //Assets
@@ -7,9 +8,18 @@ import React, { Component } from 'react'
 class Users extends Component {
   render() {
     return (
-      <>
-        <h1>Users</h1>
-      </>
+      <div className="container">
+        <div className={'row'}>
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+        </div>
+      </div>
     )
   }
 }
