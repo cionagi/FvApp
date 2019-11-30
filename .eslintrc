@@ -6,7 +6,7 @@
     "commonjs": true,
     "node": true
   },
-  "extends": ["airbnb", "prettier", "prettier", "prettier/react", "eslint:recommended"],
+  "extends": ["airbnb", "prettier", "prettier", "prettier/react", "eslint:recommended", "plugin:prettier/recommended"],
   "plugins": ["prettier", "react"],
   "globals": {
     "Atomics": "readonly",
