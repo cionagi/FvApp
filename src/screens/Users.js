@@ -35,7 +35,7 @@ class Users extends Component {
     const { posts } = this.state
     if (posts !== undefined) {
       return posts.map((post) => {
-        return <CardPost key={post.id} post={post} />
+        return <CardPost key={post.id} post={post} showAuthor={false} />
       })
     } else {
       return <h1>No posts</h1>
@@ -46,6 +46,7 @@ class Users extends Component {
     const { isLoading } = this.state
     return (
       <div className="container">
+        <h1 className={'text-center my-5'}>Author Lookup</h1>
         <div className={'row'}>{isLoading ? <Loading /> : this.renderCardPost()}</div>
       </div>
     )

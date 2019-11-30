@@ -8,6 +8,7 @@ class CardPost extends Component {
   render() {
     const {
       post: { id, title, userId, body },
+      showAuthor,
     } = this.props
 
     return (
@@ -19,9 +20,11 @@ class CardPost extends Component {
               <div className="card-body">
                 <h5 className="card-title">{title}</h5>
                 <p className="card-text">{body}</p>
-                <Link to={`/users/${userId}`}>
-                  <span className="badge badge-secondary">Autor</span>
-                </Link>
+                {showAuthor && (
+                  <Link to={`/users/${userId}`}>
+                    <span className="badge badge-secondary">Autor</span>
+                  </Link>
+                )}
               </div>
             </div>
           </Link>

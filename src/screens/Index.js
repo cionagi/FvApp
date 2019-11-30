@@ -33,7 +33,7 @@ class Index extends Component {
     const { posts } = this.state
     if (posts !== undefined) {
       return posts.map((post) => {
-        return <CardPost key={post.id} post={post} />
+        return <CardPost key={post.id} post={post} showAuthor={true} />
       })
     } else {
       return <h1>No posts</h1>
@@ -45,6 +45,7 @@ class Index extends Component {
 
     return (
       <div className="container">
+        <h1 className={'text-center my-5'}>Post Lookup</h1>
         <div className={'row'}>{isLoading ? <Loading /> : this.renderCardPost()}</div>
       </div>
     )
