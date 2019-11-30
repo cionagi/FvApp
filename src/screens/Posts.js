@@ -1,13 +1,46 @@
 //Dependency
 import React, { Component } from 'react'
-import ComentPost from '../components/ComentPost'
-import { Link } from 'react-router-dom'
 
 //Components
+import ComentPost from '../components/ComentPost'
+import { bindActionCreators } from 'redux'
+import { callGetPost } from '../store/actions/posts'
+import { connect } from 'react-redux'
+import PostInfo from '../components/PostInfo'
+import Loading from '../components/Loading'
+
 //Assets
 
 class Posts extends Component {
+  state = {
+    isLoadingPostInfo: true,
+    isLoadingPostComment: true,
+  }
+
+  componentDidMount() {
+    const postId = this.props.match.params.id
+    this.props.actions.callGetPost(postId)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const { posts } = this.props
+    if (posts.isLoadingPostInfo !== nextProps.posts.isLoadingPostInfo && !nextProps.posts.isLoadingPostInfo) {
+      this.setState({
+        isLoadingPostInfo: false,
+      })
+    } else {
+      this.setState({
+        isLoadingPostInfo: true,
+      })
+    }
+  }
+
+  drawComments() {
+    return <ComentPost />
+  }
+
   render() {
+    const { isLoadingPostInfo, isLoadingPostComment } = this.state
     return (
       <>
         <div className="jumbotron jumbotron-fluid">
@@ -16,32 +49,11 @@ class Posts extends Component {
           </div>
         </div>
         <div className={'container'}>
-          <div className={'col-12 text-center'}>
-            <h1>TITULO</h1>
-            <Link to="/users/9">
-              <span className="badge badge-secondary">Autor</span>
-            </Link>
-          </div>
-          <div className={'col-12'}>
-            <p className={'my-5 text-justify'}>
-              lLorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
-              since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only
-              five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the
-              release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker
-              including versions of Lorem Ipsum.
-            </p>
-          </div>
+          {isLoadingPostInfo ? <Loading /> : <PostInfo post={this.props.posts.post} />}
+
           <div className={'col-12'}>
             <h6>Comentarios</h6>
-            <ComentPost />
-            <ComentPost />
-            <ComentPost />
-            <ComentPost />
-            <ComentPost />
-            <ComentPost />
-            <ComentPost />
-            <ComentPost />
-            <ComentPost />
+            {isLoadingPostComment ? <Loading /> : this.drawComments()}
           </div>
         </div>
       </>
@@ -49,4 +61,14 @@ class Posts extends Component {
   }
 }
 
-export default Posts
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return { actions: bindActionCreators({ callGetPost }, dispatch) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Posts)

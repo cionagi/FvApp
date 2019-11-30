@@ -2,8 +2,10 @@ import * as Action from '../actions/ActionsTypes'
 
 const initialState = {
   isFetching: false,
+  isLoadingPostInfo: false,
   hasError: false,
   list: [],
+  post: {},
 }
 
 class Posts {
@@ -39,6 +41,33 @@ class Posts {
     return {
       ...state,
       isFetching: false,
+      hasError: true,
+    }
+  }
+
+  static [Action.GET_POST_REQUEST](state, action) {
+    return {
+      ...state,
+      post: {},
+      isLoadingPostInfo: true,
+      hasError: false,
+    }
+  }
+
+  static [Action.GET_POST_SUCCESS](state, action) {
+    const { response } = action
+    return {
+      ...state,
+      post: { ...response, comments: [] },
+      isLoadingPostInfo: false,
+      hasError: false,
+    }
+  }
+
+  static [Action.GET_POST_ERROR](state, action) {
+    return {
+      ...state,
+      isLoadingPostInfo: false,
       hasError: true,
     }
   }
