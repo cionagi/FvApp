@@ -1,6 +1,7 @@
 //Dependency
 import React, { Component } from 'react'
 import ComentPost from '../components/ComentPost'
+import { Link } from 'react-router-dom'
 
 //Components
 //Assets
@@ -17,7 +18,9 @@ class Posts extends Component {
         <div className={'container'}>
           <div className={'col-12 text-center'}>
             <h1>TITULO</h1>
-            <span className="badge badge-secondary">Autor</span>
+            <Link to="/users/9">
+              <span className="badge badge-secondary">Autor</span>
+            </Link>
           </div>
           <div className={'col-12'}>
             <p className={'my-5 text-justify'}>
