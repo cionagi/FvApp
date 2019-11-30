@@ -1,14 +1,26 @@
 //Dependency
 import React, { Component } from 'react'
+import CardPost from '../components/CardPost'
 
 //Components
 //Assets
 class Index extends Component {
+  renderCardPost() {}
+
   render() {
     return (
-      <>
-        <h1>INDEX</h1>
-      </>
+      <div className="container">
+        <div className={'row'}>
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+          <CardPost />
+        </div>
+      </div>
     )
   }
 }
