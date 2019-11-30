@@ -1,7 +1,7 @@
 import { normalize } from 'normalizr'
 import * as Action from '../store/actions/ActionsTypes'
 import axios from 'axios'
-axios.defaults.baseURL = 'http://localhost:3001/'
+axios.defaults.baseURL = 'https://jsonplaceholder.typicode.com'
 axios.defaults.timeout = 60000
 
 type Callbacks = {
@@ -18,8 +18,7 @@ type RequestConfig = {
 }
 
 const callApi = (url: String, config: RequestConfig, token: String) => {
-  let urlBase = 'API_ROOT'
-  const absoluteUrl = `${urlBase}${url}`
+  const absoluteUrl = `${url}`
   let request
   const { responseSchema = null, callbacks, data, method } = config
 

@@ -6,10 +6,10 @@ const initialState = {
   list: [],
 }
 
-class Post {
+class Posts {
   static reduce(state = initialState, action) {
-    if (Post[action.type]) {
-      return Post[action.type](state, action)
+    if (Posts[action.type]) {
+      return Posts[action.type](state, action)
     } else {
       return state
     }
@@ -18,6 +18,7 @@ class Post {
   static [Action.GET_POSTS_REQUEST](state, action) {
     return {
       ...state,
+      list: [],
       isFetching: true,
       hasError: false,
     }
@@ -25,8 +26,10 @@ class Post {
 
   static [Action.GET_POSTS_SUCCESS](state, action) {
     const { response } = action
+
     return {
       ...state,
+      list: [...response],
       isFetching: false,
       hasError: false,
     }
@@ -41,4 +44,4 @@ class Post {
   }
 }
 
-export default Post.reduce
+export default Posts.reduce

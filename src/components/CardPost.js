@@ -6,16 +6,21 @@ import { Link } from 'react-router-dom'
 //Assets
 class CardPost extends Component {
   render() {
+    console.log(this.props)
+    const {
+      post: { id, title, userId, body },
+    } = this.props
+
     return (
       <div className={'col-3'}>
         <div className={'m-2 '}>
-          <Link to="/posts/9">
+          <Link to={`/posts/${id}`}>
             <div className="card shadow-sm">
               <img src={'https://via.placeholder.com/450x300'} className="card-img-top" alt="..." />
               <div className="card-body">
-                <h5 className="card-title">Card title</h5>
-                <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                <Link to="/users/9">
+                <h5 className="card-title">{title}</h5>
+                <p className="card-text">{body}</p>
+                <Link to={`/users/${userId}`}>
                   <span className="badge badge-secondary">Autor</span>
                 </Link>
               </div>
