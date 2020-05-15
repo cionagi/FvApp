@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { callGetPosts } from '../store/actions/posts'
 import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { animateScroll as scroll } from 'react-scroll'
 
 //Components
 import CardPost from '../components/CardPost'
@@ -38,6 +39,10 @@ class Index extends Component {
     } else {
       return <h1>No posts</h1>
     }
+  }
+
+  onClickDown = () => {
+    scroll.scrollToBottom()
   }
 
   render() {
